@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Vaksinasi</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.1-dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --color-info: #206a4f;
+            --color-primary: #206a4f;
+            --color-success:#1e6f5c;
+            --color-danger: #289672;
+            --color-warning: #29bb89;  
+        }
+
+        /* reset */
+        *, h1, h2, h3, h4, h5, h6, *::after, *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ddc;
+        }
+
+        main {
+            margin: 2rem 0;
+        }
+
+        .title {
+            font-size: 20px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .date {
+            font-size: 12px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--color-warning);
+            align-self: center;
+            padding-bottom: 0.5rem;
+        }
+
+        .icon {
+            max-width: 50px;
+            max-height: 50px;
+        }
+
+        .title--data {
+            font-size: 14px;
+        }
+
+        .amount {
+            font-size: 18px;
+        }
+
+        .box {
+            padding: 1rem; 
+            border-radius: .5rem; 
+            box-shadow: 0 1rem 3rem rgba(0,0,0,.075); 
+            background-color: white; 
+            border-left: 7px solid;
+        }
+
+        .box-total--info {
+            border-left: unset;
+            background-color: var(--color-info);
+            color: white;
+            border-radius: .5rem .5rem 0 0;
+        }
+
+        .box-total--primary {
+            border-left: unset;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 0 0 .5rem .5rem;
+            border-top: 1px solid white !important;
+        }
+
+        .box--info {
+            border-color: var(--color-info);
+        }
+        
+        .box--primary {
+            border-color: var(--color-primary);
+        }
+
+        .box--success {
+            border-color: var(--color-success);
+        }
+
+        .box--warning {
+            border-color: var(--color-warning);
+        }
+
+        .box--danger {
+            border-color: var(--color-danger);
+        }
+
+        .box-header {
+            display: flex;
+            align-items: center;
+            margin-left: 0.5rem;
+        }
+
+        .box-vaccine {
+            position: relative;
+            z-index: 1;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            color: white;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='12' viewBox='0 0 20 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 12c0-.622-.095-1.221-.27-1.785A5.982 5.982 0 0 0 10 12c1.67 0 3.182-.683 4.27-1.785A5.998 5.998 0 0 0 14 12h2a4 4 0 0 1 4-4V6c-1.67 0-3.182.683-4.27 1.785C15.905 7.22 16 6.622 16 6c0-.622-.095-1.221-.27-1.785A5.982 5.982 0 0 0 20 6V4a4 4 0 0 1-4-4h-2c0 .622.095 1.221.27 1.785A5.982 5.982 0 0 0 10 0C8.33 0 6.818.683 5.73 1.785 5.905 1.22 6 .622 6 0H4a4 4 0 0 1-4 4v2c1.67 0 3.182.683 4.27 1.785A5.998 5.998 0 0 1 4 6c0-.622.095-1.221.27-1.785A5.982 5.982 0 0 1 0 6v2a4 4 0 0 1 4 4h2zm-4 0a2 2 0 0 0-2-2v2h2zm16 0a2 2 0 0 1 2-2v2h-2zM0 2a2 2 0 0 0 2-2H0v2zm20 0a2 2 0 0 1-2-2h2v2zm-10 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z' fill='%236200ff' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .box-vaccine-total {
+            background-color: white;
+            color: black;
+        }
+
+        .box-vaccine--info {
+            background-color: var(--color-info);
+        }
+
+        .box-vaccine--success {
+            background-color: var(--color-success);
+        }
+
+        .box-vaccine--warning {
+            background-color: var(--color-warning);
+        }
+
+        .box-vaccine--primary {
+            background-color: var(--color-primary);
+        }
+
+        .box-vaccine--danger {
+            background-color: var(--color-danger);
+        }
+
+        .text--vaccine {
+            font-size: 14px;
+            margin-bottom: .5rem;
+        }
+
+        .info-progress {
+            display: flex; 
+            align-items: center;
+        }
+
+        .bar {
+            background-color: #ddd; 
+            border-radius: .5rem; 
+            width: 100%; 
+            height: 10px;
+        }
+
+        .bar--fill {
+            border-radius: .5rem; 
+            background-color: #dc3545;
+            height: inherit;
+        }
+
+        @media screen and (min-width: 768px) {
+            .title {
+                font-size: 36px;
+            }
+
+            .date {
+                font-size: 16px;
+            }
+
+            .subtitle {
+                font-size: 24px;
+            }
+
+            .icon {
+                max-width: 70px;
+                max-height: 70px;
+            }
+
+            .title--data {
+                font-size: 20px;
+            }
+
+            .amount {
+                font-size: 32px;
+            }
+
+            .text--vaccine {
+                font-size: 16px;
+                margin-bottom: 1rem;
+            }
+            
+            .box-header--vaccine {
+                margin-left: 1rem;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .box-header--vaccine {
+                margin-left: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1 class="text-center title">Dashboard Vaksinasi COVID-19</h1>
+        <p class="text-center date"><span class="text-info">* </span>Data Update: Selasa, 04 Mei 2021</p>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding: 1.5rem 2.5rem; display: flex; flex-direction: column;">
+                <h3 class="text-center subtitle">Data Vaksinasi Yakes</h3>
+                <div id="data-yakes"></div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding: 1.5rem 2.5rem; display: flex; flex-direction: column;">
+                <h3 class="text-center subtitle">Data Vaksinasi Nasional</h3>
+                <div id="data-nasional"></div>
+            </div>
+        </div>
+    </main>
+ 
+    <script src="./bootstrap-3.3.1-dist/js/bootstrap.min.js"></script>
+    <script>
+
+        // data
+        const dataYakes = [
+            {
+                title: 'Total Sasaran Vaksinasi',
+                amount: 41385,
+                icon: 'vaccine.svg',
+                key: 'total',
+                vaccine: null
+            },
+            {
+                title: 'Total Vaksinasi',
+                amount: 26441,
+                icon: 'list.svg',
+                key: 'total',
+                vaccine: [
+                    {
+                        title: 'Vaksinasi 1',
+                        amount: 18390,
+                        percent: '44.44%'
+                    },
+                    {
+                        title: 'Vaksinasi 2',
+                        amount: 8051,
+                        percent: '19.45%'
+                    },
+                ]
+            },
+            {
+                title: 'Tenaga Kesahatan',
+                amount: 167,
+                icon: 'doctor.svg',
+                vaccine: [
+                    {
+                        title: 'Vaksinasi 1',
+                        amount: 165,
+                        percent: '98.8%'
+                    },
+                    {
+                        title: 'Vaksinasi 2',
+                        amount: 98,
+                        percent: '58.68%'
+                    },
+                ]
+            },
+            {
+                title: 'Karyawan',
+                amount: 10350,
+                icon: 'employee-card.svg',
+                vaccine: [
+                    {
+                        title: 'Vaksinasi 1',
+                        amount: 7236,
+                        percent: '69.91%'
+                    },
+                    {
+                        title: 'Vaksinasi 2',
+                        amount: 3174,
+                        percent: '30.67%'
+                    },
+                ]
+            },
+            {
+                title: 'Pensiun & Keluarga',
+                amount: 30868,
+                icon: 'family.svg',
+                vaccine: [
+                    {
+                        title: 'Vaksinasi 1',
+                        amount: 10989,
+                        percent: '35.6%'
+                    },
+                    {
+                        title: 'Vaksinasi 2',
+                        amount: 4779,
+                        percent: '15.49%'
+                    },
+                ]
+            },
+            
+        ];
+        const dataNasional = [
+            {
+                title: 'Total Sasaran Vaksinasi',
+                amount: 181554465,
+                icon: 'vaccine.svg',
+                key: 'total',
+                vaccine: null
+            },
+            {
+                title: 'Total Vaksinasi',
+                amount: 40349051,
+                icon: 'list.svg',
+                key: 'total',
+                vaccine: [
+                    {
+                        title: 'Vaksinasi 1',
+                        amount: 12306015,
+                        percent: '30.5%'
+                    },
+                    {
+                        title: 'Vaksinasi 2',
+                        amount: 7583443,
+                        percent: '18.79%'
+                    },
+                ]
+            },
+            {
+                title: 'SDM Kesahatan',
+                icon: 'doctor.svg',
+                amount: 1468764,
+                vaccine: [
+                    {
+                        title: 'Vaksinasi 1',
+                        amount: 1491053,
+                        percent: '101.52%'
+                    },
+                    {
+                        title: 'Vaksinasi 2',
+                        amount: 1352846,
+                        percent: '92.11%'
+                    },
+                ]
+            },
+            {
+                title: 'Petugas Publik',
+                amount: 17327169,
+                icon: 'employee-card.svg',
+                vaccine: [
+                    {
+                        title: 'Vaksinasi 1',
+                        amount: 8294475,
+                        percent: '47.87%'
+                    },
+                    {
+                        title: 'Vaksinasi 2',
+                        amount: 4730728,
+                        percent: '27.3%'
+                    },
+                ]
+            },
+            {
+                title: 'Lansia',
+                amount: 21553118,
+                icon: 'family.svg',
+                vaccine: [
+                    {
+                        title: 'Vaksinasi Dosis 1',
+                        amount: 2520487,
+                        percent: '11.69%'
+                    },
+                    {
+                        title: 'Vaksinasi Dosis 2',
+                        amount: 1499869,
+                        percent: '6.96%'
+                    },
+                ]
+            },
+            
+        ];
+        
+        const color = ['info', 'primary', 'success', 'danger', 'warning'];
+
+        const nFormatter = (num, digits = 1) =>  {
+            let si = [
+                { value: 1, symbol: "" },
+                { value: 1E3, symbol: "K" },
+                { value: 1E6, symbol: "M" },
+                { value: 1E9, symbol: "G" },
+                { value: 1E12, symbol: "T" },
+                { value: 1E15, symbol: "P" },
+                { value: 1E18, symbol: "E" }
+            ];
+            let rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+            let i;
+            
+            for (i = si.length - 1; i > 0; i--) {
+                if (num >= si[i].value) {
+                break;
+                }
+            }
+            
+            return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
+        }
+
+        const Content = (marginTop = '', color, data) => {
+
+            const colorStyle = color == 'info' ? '#0dcaf0' :
+                color == 'primary' ?  '#e6dd3b' : 
+                color == 'success' ? '#1e6f5c': 
+                color == 'danger' ? '#289672' :
+                color == 'warning' ? '#29bb89' : 'black'
+
+            return `
+                <div class="row box box--${color} ${data.key ? `box-total--${color}` : ''}" style="margin-top: ${data.vaccine && !data.key ? '1.5rem' : '0'};">
+                    <div class="row box-header ${data.vaccine ? 'box-header--vaccine' : ''}" >
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 ${data.vaccine ? 'col-lg-offset-1' : ''} col-xl-2">
+                            <img class="icon" src="../img/${data.icon}"/>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 ${data.vaccine ? 'col-lg-5 col-xl-5' : 'col-lg-6 col-xl-6'}">
+                            <h4 class="title--data">${data.title}</h4>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 ${data.vaccine ? 'col-lg-5 col-xl-5' : 'col-lg-4 col-xl-4'}">
+                            <h2 class="amount"><strong style="${data.key ? '' : `color: ${colorStyle}`}">${nFormatter(data.amount)}</strong></h2>
+                        </div>
+                    </div>
+                    ${data.vaccine ? `
+                        <div class="row" style="margin-top: 2rem; margin-bottom: 1rem;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 hidden-xs" style="width: 4%;"></div>
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-0 col-md-5 col-lg-5 col-xl-5 box-vaccine ${ data.key ? 'box-vaccine-total' : `box-vaccine--${color}`}">
+                                <h4 class="text--vaccine">${data.vaccine[0].title}</h4>
+                                <h4 class="text--vaccine"><strong>${nFormatter(data.vaccine[0].amount)}</strong></h4>
+                                <div class="info-progress row">
+                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                        <div class="bar">
+                                            <div class="bar--fill" style="width: ${data.vaccine[0].percent};"></div>
+                                        </div>    
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                        <span>${data.vaccine[0].percent}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-2 col-md-12 col-lg-2 col-xl-2 hidden-lg" style="width: 8%; height: 1rem;"></div>
+                            <div class="col-xs-12 col-sm-1 col-md-12 col-lg-1 col-xl-1 hidden-xs hidden-sm hidden-md" style="width: 4%;"></div>
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-0 col-md-5 col-lg-5 col-xl-5 box-vaccine ${ data.key ? 'box-vaccine-total' : `box-vaccine--${color}`}">
+                                <h4 class="text--vaccine">${data.vaccine[1].title}</h4>
+                                <h4 class="text--vaccine"><strong>${nFormatter(data.vaccine[1].amount)}</strong></h4>
+                                <div class="info-progress row">
+                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                        <div class="bar">
+                                            <div class="bar--fill" style="width: ${data.vaccine[1].percent};"></div>
+                                        </div>    
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                        <span>${data.vaccine[1].percent}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    ` : ''}
+                </div>
+            `
+        }
+
+        const elDataYakes = document.getElementById('data-yakes');
+        const elDataNasional = document.getElementById('data-nasional');
+
+        let contentHTMLYakes = '';
+        let contentHTMLNasional = '';
+
+        dataYakes.forEach((data, index) => {
+            const marginTop = index > 0 ? 'mt-3' : '';
+            const colorName = (dataYakes.length - 1) == index ? color[dataYakes.length - 1] : color[index]; 
+            contentHTMLYakes += Content(marginTop, colorName, data)
+        })
+
+        dataNasional.forEach((data, index) => {
+            const marginTop = index > 0 ? 'mt-3' : '';
+            const colorName = (dataNasional.length - 1) == index ? color[dataYakes.length - 1] : color[index];
+            contentHTMLNasional += Content(marginTop, colorName, data)
+        })
+
+        elDataYakes.innerHTML = contentHTMLYakes;
+        elDataNasional.innerHTML = contentHTMLNasional;
+
+    </script>
+</body>
+</html>
