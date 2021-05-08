@@ -16,7 +16,7 @@
         }
 
         /* reset */
-        *, h1, h2, h3, h4, h5, h6, *::after, *::before {
+        *, h1, h2, h3, h4, h5, h6, p, *::after, *::before {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -56,6 +56,7 @@
 
         .title--data {
             font-size: 14px;
+            /* font-weight: bold; */
         }
 
         .amount {
@@ -145,6 +146,46 @@
             background-color: var(--color-danger);
         }
 
+        .box-not-vaccine {
+            border: 2px solid; 
+            padding: 0.5rem 0; 
+            border-radius: 0.5rem;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='12' viewBox='0 0 20 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 12c0-.622-.095-1.221-.27-1.785A5.982 5.982 0 0 0 10 12c1.67 0 3.182-.683 4.27-1.785A5.998 5.998 0 0 0 14 12h2a4 4 0 0 1 4-4V6c-1.67 0-3.182.683-4.27 1.785C15.905 7.22 16 6.622 16 6c0-.622-.095-1.221-.27-1.785A5.982 5.982 0 0 0 20 6V4a4 4 0 0 1-4-4h-2c0 .622.095 1.221.27 1.785A5.982 5.982 0 0 0 10 0C8.33 0 6.818.683 5.73 1.785 5.905 1.22 6 .622 6 0H4a4 4 0 0 1-4 4v2c1.67 0 3.182.683 4.27 1.785A5.998 5.998 0 0 1 4 6c0-.622.095-1.221.27-1.785A5.982 5.982 0 0 1 0 6v2a4 4 0 0 1 4 4h2zm-4 0a2 2 0 0 0-2-2v2h2zm16 0a2 2 0 0 1 2-2v2h-2zM0 2a2 2 0 0 0 2-2H0v2zm20 0a2 2 0 0 1-2-2h2v2zm-10 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z' fill='%236200ff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .box-not-vaccine strong {
+            display: block; 
+            margin: .5rem 0;
+        }
+
+        .box-not-vaccine--1 {
+            margin-left: 2rem;
+        }
+
+        .box-not-vaccine--2 {
+            margin-left: 1.5rem;
+        }
+
+        .box-not-vaccine--info {
+            border-color: var(--color-info);
+        }
+
+        .box-not-vaccine--success {
+            border-color: var(--color-success);
+        }
+
+        .box-not-vaccine--warning {
+            border-color: var(--color-warning);
+        }
+
+        .box-not-vaccine--primary {
+            border-color: var(--color-primary);
+        }
+
+        .box-not-vaccine--danger {
+            border-color: var(--color-danger);
+        }
+
         .text--vaccine {
             font-size: 14px;
             margin-bottom: .5rem;
@@ -198,9 +239,21 @@
                 font-size: 16px;
                 margin-bottom: 1rem;
             }
+
+            .text--vaccine strong {
+                font-size: 20px;
+            }
             
             .box-header--vaccine {
                 margin-left: 1rem;
+            }
+
+            .box-not-vaccine--1 {
+                margin-left: unset;
+            }
+
+            .box-not-vaccine--2 {
+                margin-left: unset;
             }
         }
 
@@ -218,7 +271,7 @@
         <p class="text-center date"><span class="text-info">* </span>Data Update: Selasa, 04 Mei 2021</p>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding: 1.5rem 2.5rem; display: flex; flex-direction: column;">
-                <h3 class="text-center subtitle">Data Vaksinasi Yakes</h3>
+                <h3 class="text-center subtitle">Data Vaksinasi Telkom Group</h3>
                 <div id="data-yakes"></div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding: 1.5rem 2.5rem; display: flex; flex-direction: column;">
@@ -241,8 +294,8 @@
                 vaccine: null
             },
             {
-                title: 'Total Vaksinasi',
-                amount: 26441,
+                title: 'Total Realisasi Vaksinasi',
+                amount: null,
                 icon: 'list.svg',
                 key: 'total',
                 vaccine: [
@@ -273,6 +326,29 @@
                         amount: 98,
                         percent: '58.68%'
                     },
+                ],
+                notVaccine: [
+                    {
+                        title: 'Siap Vaksin',
+                        amount: 7562,
+                        percent: '28.11%'
+                    },
+                    {
+                        title: 'Belum Dapat Tiket',
+                        amount: 1280,
+                        percent: '4.76%'
+                    },
+                    {
+                        title: 'Batal Vaksin',
+                        amount: 6,
+                        percent: '0.02%'
+                    },
+                    {
+                        title: 'Tunda Vaksin',
+                        amount: 129,
+                        percent: '0.48%'
+                    },
+                    
                 ]
             },
             {
@@ -290,6 +366,29 @@
                         amount: 3174,
                         percent: '30.67%'
                     },
+                ],
+                notVaccine: [
+                    {
+                        title: 'Siap Vaksin',
+                        amount: 7562,
+                        percent: '28.11%'
+                    },
+                    {
+                        title: 'Belum Dapat Tiket',
+                        amount: 1280,
+                        percent: '4.76%'
+                    },
+                    {
+                        title: 'Batal Vaksin',
+                        amount: 6,
+                        percent: '0.02%'
+                    },
+                    {
+                        title: 'Tunda Vaksin',
+                        amount: 129,
+                        percent: '0.48%'
+                    },
+                    
                 ]
             },
             {
@@ -307,6 +406,29 @@
                         amount: 4779,
                         percent: '15.49%'
                     },
+                ],
+                notVaccine: [
+                    {
+                        title: 'Siap Vaksin',
+                        amount: 7562,
+                        percent: '28.11%'
+                    },
+                    {
+                        title: 'Belum Dapat Tiket',
+                        amount: 1280,
+                        percent: '4.76%'
+                    },
+                    {
+                        title: 'Batal Vaksin',
+                        amount: 6,
+                        percent: '0.02%'
+                    },
+                    {
+                        title: 'Tunda Vaksin',
+                        amount: 129,
+                        percent: '0.48%'
+                    },
+                    
                 ]
             },
             
@@ -320,8 +442,8 @@
                 vaccine: null
             },
             {
-                title: 'Total Vaksinasi',
-                amount: 40349051,
+                title: 'Total Realisasi Vaksinasi',
+                amount: null,
                 icon: 'list.svg',
                 key: 'total',
                 vaccine: [
@@ -426,15 +548,18 @@
             return `
                 <div class="row box box--${color} ${data.key ? `box-total--${color}` : ''}" style="margin-top: ${data.vaccine && !data.key ? '1.5rem' : '0'};">
                     <div class="row box-header ${data.vaccine ? 'box-header--vaccine' : ''}" >
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 ${data.vaccine ? 'col-lg-offset-1' : ''} col-xl-2">
+                        <div class="${data.amount ? 'col-xs-12' : 'col-xs-6'} col-sm-12 col-md-12 col-lg-2 ${data.vaccine ? 'col-lg-offset-1' : ''} col-xl-2">
                             <img class="icon" src="./img/${data.icon}"/>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 ${data.vaccine ? 'col-lg-5 col-xl-5' : 'col-lg-6 col-xl-6'}">
+                        <div class="col-xs-12 col-sm-12 col-md-12 ${data.amount ? '' : 'col-lg-10 col-xl-10'}${data.vaccine ? 'col-lg-5 col-xl-5' : 'col-lg-6 col-xl-6'}">
                             <h4 class="title--data">${data.title}</h4>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 ${data.vaccine ? 'col-lg-5 col-xl-5' : 'col-lg-4 col-xl-4'}">
-                            <h2 class="amount"><strong style="${data.key ? '' : `color: ${colorStyle}`}">${nFormatter(data.amount)}</strong></h2>
-                        </div>
+                        ${data.amount ? `
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                <h2 class="amount"><strong style="${data.key ? '' : `color: ${colorStyle}`}">${nFormatter(data.amount)}</strong></h2>
+                            </div>
+                        ` : ''}
+                        
                     </div>
                     ${data.vaccine ? `
                         <div class="row" style="margin-top: 2rem; margin-bottom: 1rem;">
@@ -470,6 +595,81 @@
                                 </div>
                             </div>
                         </div>    
+                    ` : ''}
+                    ${data.notVaccine ? `
+                        <div class="row" style="padding: 1.5rem 0;">
+                            <h4 class="title--data" style="text-align: center;">Total Belum Vaksinasi</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 hidden-xs" style="width: 4%;"></div>
+                            <div class="col-xs-5 col-sm-5 col-sm-offset-1 col-sm-5 col-lg-5 col-xl-5 text-center box-not-vaccine box-not-vaccine--1 box-not-vaccine--${color}">
+                                <h4 class="text--vaccine">${data.notVaccine[0].title}</h4>
+                                <h4><strong>${nFormatter(data.notVaccine[0].amount)}</strong></h4>
+                                <span class="hidden-sm hidden-md hidden-lg hidden-xl">${data.notVaccine[0].percent}</span>
+                                <div class="info-progress row hidden-xs">
+                                    <div class="col-xs-8 col-sm-7 col-sm-offset-1 col-md-7 col-lg-7 col-xl-7">
+                                        <div class="bar">
+                                            <div class="bar--fill" style="width: ${data.notVaccine[0].percent};"></div>
+                                        </div>    
+                                    </div>
+                                    <div class="col-xs-4 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                        <span>${data.notVaccine[0].percent}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 hidden-xs hidden-lg" style="width: 8%;"></div>
+                            <div class="col-xs-12 col-sm-1 col-md-12 col-lg-1 col-xl-1 hidden-xs hidden-sm hidden-md" style="width: 4%;"></div>
+                            <div class="col-xs-5 col-sm-5 col-sm-5 col-lg-5 col-xl-5 text-center box-not-vaccine box-not-vaccine--2 box-not-vaccine--${color}">
+                                <h4 class="text--vaccine">${data.notVaccine[1].title}</h4>
+                                <h4><strong>${nFormatter(data.notVaccine[1].amount)}</strong></h4>
+                                <span class="hidden-sm hidden-md hidden-lg hidden-xl">${data.notVaccine[1].percent}</span>
+                                <div class="info-progress row hidden-xs">
+                                    <div class="col-xs-8 col-sm-7 col-sm-offset-1 col-md-7 col-lg-7 col-xl-7">
+                                        <div class="bar">
+                                            <div class="bar--fill" style="width: ${data.notVaccine[1].percent};"></div>
+                                        </div>    
+                                    </div>
+                                    <div class="col-xs-4 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                        <span>${data.notVaccine[1].percent}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 1.5rem; margin-bottom: .75rem">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 hidden-xs" style="width: 4%;"></div>
+                            <div class="col-xs-5 col-sm-5 col-sm-5 col-lg-5 col-xl-5 text-center box-not-vaccine box-not-vaccine--1 box-not-vaccine--${color}">
+                                <h4 class="text--vaccine">${data.notVaccine[2].title}</h4>
+                                <h4><strong>${nFormatter(data.notVaccine[2].amount)}</strong></h4>
+                                <span class="hidden-sm hidden-md hidden-lg hidden-xl">${data.notVaccine[2].percent}</span>
+                                <div class="info-progress row hidden-xs">
+                                    <div class="col-xs-8 col-sm-7 col-sm-offset-1 col-md-7 col-lg-7 col-xl-7">
+                                        <div class="bar">
+                                            <div class="bar--fill" style="width: ${data.notVaccine[2].percent};"></div>
+                                        </div>    
+                                    </div>
+                                    <div class="col-xs-4 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                        <span>${data.notVaccine[2].percent}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 hidden-xs hidden-lg" style="width: 8%;"></div>
+                            <div class="col-xs-12 col-sm-1 col-md-12 col-lg-1 col-xl-1 hidden-xs hidden-sm hidden-md" style="width: 4%;"></div>
+                            <div class="col-xs-5 col-sm-5 col-sm-5 col-lg-5 col-xl-5 text-center box-not-vaccine box-not-vaccine--2 box-not-vaccine--${color}">
+                                <h4 class="text--vaccine">${data.notVaccine[3].title}</h4>
+                                <h4><strong>${nFormatter(data.notVaccine[3].amount)}</strong></h4>
+                                <span class="hidden-sm hidden-md hidden-lg hidden-xl">${data.notVaccine[3].percent}</span>
+                                <div class="info-progress row hidden-xs">
+                                    <div class="col-xs-8 col-sm-7 col-sm-offset-1 col-md-7 col-lg-7 col-xl-7">
+                                        <div class="bar">
+                                            <div class="bar--fill" style="width: ${data.notVaccine[3].percent};"></div>
+                                        </div>    
+                                    </div>
+                                    <div class="col-xs-4 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                        <span>${data.notVaccine[3].percent}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     ` : ''}
                 </div>
             `
